@@ -1,3 +1,8 @@
+"""
+In order traversal of an actual BST returns an array, which is sorted in Ascending order.
+If the returned array is not sorted in ascending order, then the tree is not BST.
+"""
+
 def iorder(root, arr):
     if root == None:
         return True
