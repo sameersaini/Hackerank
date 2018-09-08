@@ -25,6 +25,10 @@ def hackerrankInString(s):
                 elif visited[8]and not visited[9]: visited[9] = True
             else:
                 if visited[main.index(c)-1] and not visited[main.index(c)]: visited[main.index(c)] = True
+
+        # optimization : do not loop if all required characters have been visited.
+        if False in visited: continue
+        else: break
     if False in visited: return "NO"
     else: return "YES"
 
