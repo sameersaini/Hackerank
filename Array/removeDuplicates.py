@@ -1,17 +1,18 @@
 class Solution:
-    def removeDuplicates(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        d = {}
-        i = 0
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+
+        i = 1
+        start = 1
 
         while i < len(nums):
-            if nums[i] in d:
-                nums.pop(i)
-            else:
-                d[nums[i]] = 1
+            while i < len(nums) and nums[i] == nums[i - 1]:
                 i += 1
 
-        return len(nums)
+            if i < len(nums):
+                nums[start] = nums[i]
+                start += 1
+                i += 1
+
+        return start
