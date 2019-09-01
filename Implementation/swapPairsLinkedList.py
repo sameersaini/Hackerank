@@ -10,49 +10,18 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
-        if head == None:
-            return None
-
-        if head.next == None:
+        if not head or not head.next:
             return head
 
-        temp1 = head
-        temp2 = temp1.next
+        node1 = head
+        node2 = head.next
+        node3 = head.next.next
 
-        temp1.next = temp2.next
-        temp2.next = temp1
+        node2.next = node1
 
-        head = temp2
+        node1.next = self.swapPairs(node3)
 
-        current = temp1
-
-        if current.next == None:
-            return head
-        else:
-            temp1 = current.next
-
-        if temp1.next == None:
-            return head
-        else:
-            temp2 = temp1.next
-
-
-        while current.next != None:
-            temp1.next = temp2.next
-            temp2.next = temp1
-            current.next = temp2
-
-            current = temp1
-
-            if current.next == None:
-                return head
-            else:
-                temp1 = current.next
-
-            if temp1.next == None:
-                return head
-            else:
-                temp2 = temp1.next
+        return node2
 
 
 
