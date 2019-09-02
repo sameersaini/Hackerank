@@ -25,33 +25,35 @@ class Solution:
 
     class Solution:
         def findMin(self, node):
-            if not node:
-                return None
-
             while node.left:
                 node = node.left
 
             return node
 
-        def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        def deleteNode(self, root, key):
+            """
+            :type root: TreeNode
+            :type key: int
+            :rtype: TreeNode
+            """
             if not root:
-                return root
+                return None
+
+            if root.val == key:
+                if not root.left and not root.right:
+                    return None
+                if not root.left or not root.right:
+                    return root.left or root.right
+
+                minNode = self.findMin(root.right)
+
+                root.val = minNode.val
+
+                root.right = self.deleteNode(root.right, minNode.val)
 
             if root.val > key:
                 root.left = self.deleteNode(root.left, key)
-            elif root.val < key:
-                root.right = self.deleteNode(root.right, key)
             else:
-                if not root.left and not root.right:
-                    return None
-                elif not root.left:
-                    return root.right
-                elif not root.right:
-                    return root.left
-                else:
-                    minNode = self.findMin(root.right)
-                    root.val = minNode.val
-
-                    root.right = self.deleteNode(root.right, minNode.val)
+                root.right = self.deleteNode(root.right, key)
 
             return root
